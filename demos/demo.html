@@ -122,11 +122,19 @@
 			<li>Aliquam tincidunt mauris eu risus.</li>
 		</ol>
 		
-		<script src="../bower_components/jquery/jquery.js"></script>
-		<script src="../bower_components/filament-fixed/fixedfixed.js"></script>
+		<script src="../app/bower_components/jquery/jquery.js"></script>
+		<script src="../app/bower_components/filament-fixed/fixedfixed.js"></script>
 		<script src="../fixedsticky.js"></script>
 		<script>
 		$( '.top, .bottom' ).fixedsticky();
+		$( '#top-b').on('stuck', function(){
+			console.log('caught top-b stuck')
+		})
+
+		$( '#top-b').on('unstuck', function(){
+			console.log('caught top-b unstuck')
+		})
+
 		</script>
 	</body>
 </html>

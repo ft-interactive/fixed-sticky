@@ -57,6 +57,14 @@ module.exports = function(grunt) {
 		'gh-pages': {
 			options: {},
 			src: ['<%= name %>.css', '<%= name %>.js', 'bower_components/**/*', 'test/**/*', 'demos/**/*']
+		},
+		connect: {
+			server: {
+				options: {
+					port: 9001,
+					base: ''
+				}
+			}
 		}
 	});
 
@@ -67,4 +75,5 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'lint', [ 'jshint' ] );
 	grunt.registerTask( 'build', [ 'clean', 'jshint:src', 'qunit', 'uglify' ] );
 	grunt.registerTask( 'default', [ 'jshint', 'qunit' ] );
+	grunt.registerTask( 'server', ['connect:server:keepalive'] );
 };

@@ -18,6 +18,8 @@
 		return parseInt( unit, 10 ) || 0;
 	}
 
+	var states = {};
+
 	var S = {
 		classes: {
 			plugin: 'fixedsticky',
@@ -68,6 +70,12 @@
 				$parent = $el.parent(),
 				parentOffset = $parent.offset().top,
 				parentHeight = $parent.outerHeight();
+
+				var currentState = getState( $el );
+				if(currentState !== states[el.id] ){
+					states[el.id] = currentState;
+					$el.trigger(eventName(currentState));
+				}
 
 			if( !initialOffset ) {
 				initialOffset = $el.offset().top;
@@ -142,18 +150,22 @@
 		},
 		init: function( el ) {
 			var $el = $( el );
-
+			console.log($el);
 			if( S.bypass() ) {
 				return;
 			}
 
 			return $el.each(function() {
 				var _this = this;
-				$( win ).bind( 'scroll.fixedsticky', function() {
+				states[ _this.id ] = getState( $(_this) );
+				console.log(states);
+				$( win ).bind( 'scroll.fixedsticky', function(e) {
+					//console.log('scroll.fixedsticky window event', e);
 					S.update( _this );
 				}).trigger( 'scroll.fixedsticky' );
 
-				$( win ).bind( 'resize.fixedsticky', function() {
+				$( win ).bind( 'resize.fixedsticky', function(e) {
+					//console.log('resize.fixedsticky window event', e);
 					if( $el.is( '.' + S.classes.active ) ) {
 						S.update( _this );
 					}
@@ -161,6 +173,21 @@
 			});
 		}
 	};
+
+	function getState($el){
+		var state = false;
+		if( $el.hasClass('fixedsticky-on') ){
+			state = true;
+		}
+		return state;
+	}
+
+	function eventName(v){
+		if(v){
+			return 'stuck';
+		}
+		return 'unstuck';
+	}
 
 	win.FixedSticky = S;
 
