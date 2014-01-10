@@ -19,12 +19,15 @@
 	}
 
 	var stuckStates = {};
+	var clearStates = {};
 
 	var S = {
 		classes: {
 			plugin: 'fixedsticky',
 			active: 'fixedsticky-on',
 			inactive: 'fixedsticky-off',
+			overlap: 'fixedsticky-overlap',
+			clear: 'fixedsticky-clear',
 			clone: 'fixedsticky-dummy',
 			withoutFixedFixed: 'fixedsticky-withoutfixedfixed'
 		},
