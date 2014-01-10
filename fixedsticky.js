@@ -18,7 +18,7 @@
 		return parseInt( unit, 10 ) || 0;
 	}
 
-	var states = {};
+	var stuckStates = {};
 
 	var S = {
 		classes: {
@@ -58,7 +58,7 @@
 				initialOffset = $el.data( S.keys.offset ),
 				scroll = S.getScrollTop(),
 				isAlreadyOn = $el.is( '.' + S.classes.active ),
-				toggle = function( turnOn ) {
+				toggleStuck = function( turnOn ) {
 					$el[ turnOn ? 'addClass' : 'removeClass' ]( S.classes.active )
 						[ !turnOn ? 'addClass' : 'removeClass' ]( S.classes.inactive );
 				},
@@ -71,9 +71,9 @@
 				parentOffset = $parent.offset().top,
 				parentHeight = $parent.outerHeight();
 
-				var currentState = getState( $el );
-				if(currentState !== states[el.id] ){
-					states[el.id] = currentState;
+				var currentState = getStuckState( $el );
+				if(currentState !== stuckStates[el.id] ){
+					stuckStates[el.id] = currentState;
 					$el.trigger(eventName(currentState));
 				}
 
@@ -81,6 +81,7 @@
 				initialOffset = $el.offset().top;
 				$el.data( S.keys.offset, initialOffset );
 				$el.after( $( '<div>' ).addClass( S.classes.clone ).height( height ) );
+				console.log(height);
 			}
 
 			if( !position ) {
@@ -124,11 +125,11 @@
 
 			if( position.top && isFixedToTop() || position.bottom && isFixedToBottom() ) {
 				if( !isAlreadyOn ) {
-					toggle( true );
+					toggleStuck( true );
 				}
 			} else {
 				if( isAlreadyOn ) {
-					toggle( false );
+					toggleStuck( false );
 				}
 			}
 		},
@@ -150,22 +151,18 @@
 		},
 		init: function( el ) {
 			var $el = $( el );
-			console.log($el);
 			if( S.bypass() ) {
 				return;
 			}
 
 			return $el.each(function() {
 				var _this = this;
-				states[ _this.id ] = getState( $(_this) );
-				console.log(states);
+				stuckStates[ _this.id ] = getStuckState( $(_this) );
 				$( win ).bind( 'scroll.fixedsticky', function(e) {
-					//console.log('scroll.fixedsticky window event', e);
 					S.update( _this );
 				}).trigger( 'scroll.fixedsticky' );
 
 				$( win ).bind( 'resize.fixedsticky', function(e) {
-					//console.log('resize.fixedsticky window event', e);
 					if( $el.is( '.' + S.classes.active ) ) {
 						S.update( _this );
 					}
@@ -174,19 +171,16 @@
 		}
 	};
 
-	function getState($el){
-		var state = false;
+	function getStuckState($el){
+		var state = 'unstuck';
 		if( $el.hasClass('fixedsticky-on') ){
-			state = true;
+			state = 'stuck';
 		}
 		return state;
 	}
 
 	function eventName(v){
-		if(v){
-			return 'stuck';
-		}
-		return 'unstuck';
+		return v;
 	}
 
 	win.FixedSticky = S;

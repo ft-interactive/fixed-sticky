@@ -1,5 +1,5 @@
 {
-  "name": "filament-sticky",
+  "name": "filament-sticky-fork",
   "version": "0.1.3",
   "main": ["fixedsticky.js", "fixedsticky.css"],
   "ignore": [

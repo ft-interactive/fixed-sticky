@@ -52,3 +52,7 @@ body {
 .container {
 	background-color: #999;
 }
+
+.fixedsticky-dummy{
+	background: url('background.png');
+}
