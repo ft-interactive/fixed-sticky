@@ -19,16 +19,16 @@
 	}
 
 	var stuckStates = {};
-	var clearStates = {};
+	var overlapStates = {};
 
 	var S = {
 		classes: {
 			plugin: 'fixedsticky',
 			active: 'fixedsticky-on',
 			inactive: 'fixedsticky-off',
-			overlap: 'fixedsticky-overlap',
-			clear: 'fixedsticky-clear',
 			clone: 'fixedsticky-dummy',
+			overlap: 'fixedsticky-dummy-over',
+			clear: 'fixedsticky-dummy-clear',
 			withoutFixedFixed: 'fixedsticky-withoutfixedfixed'
 		},
 		keys: {
@@ -61,9 +61,14 @@
 				initialOffset = $el.data( S.keys.offset ),
 				scroll = S.getScrollTop(),
 				isAlreadyOn = $el.is( '.' + S.classes.active ),
+				isAlreadyOverlapping = $el.is( '.' + S.classes.overlap ),
 				toggleStuck = function( turnOn ) {
 					$el[ turnOn ? 'addClass' : 'removeClass' ]( S.classes.active )
 						[ !turnOn ? 'addClass' : 'removeClass' ]( S.classes.inactive );
+				},
+				toggleOverlap = function( turnOn ) {
+					$el[ turnOn ? 'addClass' : 'removeClass' ]( S.classes.overlap )
+						[ !turnOn ? 'addClass' : 'removeClass' ]( S.classes.clear );	
 				},
 				viewportHeight = $( window ).height(),
 				position = $el.data( S.keys.position ),
@@ -74,18 +79,24 @@
 				parentOffset = $parent.offset().top,
 				parentHeight = $parent.outerHeight();
 
-				var currentState = getStuckState( $el );
-				if(currentState !== stuckStates[el.id] ){
-					stuckStates[el.id] = currentState;
-					$el.trigger(eventName(currentState));
+//				var currentStuckState = isAlreadyOn;
+				if(isAlreadyOn !== stuckStates[el.id] ){
+					stuckStates[el.id] = isAlreadyOn;
+					$el.trigger( eventName('stuck', isAlreadyOn) );
 				}
+
+				if(isAlreadyOverlapping !== overlapStates[el.id]){
+					overlapStates[el.id] = isAlreadyOverlapping;
+					$el.trigger( eventName('overlap', isAlreadyOverlapping) );	
+				}
+
 
 			if( !initialOffset ) {
 				initialOffset = $el.offset().top;
 				$el.data( S.keys.offset, initialOffset );
 				$el.after( $( '<div>' ).addClass( S.classes.clone ).height( height ) );
-				console.log(height);
 			}
+			
 
 			if( !position ) {
 				// Some browsers require fixed/absolute to report accurate top/left values.
@@ -123,6 +134,10 @@
 					scroll + viewportHeight - elBottom >= parentOffset + ( height || 0 );
 			}
 
+			function isOverlapping() {
+				return ((height + initialOffset) > scroll );
+			}
+
 			elTop = getPx( $el.css( 'top' ) );
 			elBottom = getPx( $el.css( 'bottom' ) );
 
@@ -130,9 +145,15 @@
 				if( !isAlreadyOn ) {
 					toggleStuck( true );
 				}
+				if( isOverlapping() && !isAlreadyOverlapping ){
+					toggleOverlap( true );
+				}else if( !isOverlapping() && isAlreadyOverlapping ){
+					toggleOverlap( false );
+				}
 			} else {
 				if( isAlreadyOn ) {
 					toggleStuck( false );
+					toggleOverlap( false );
 				}
 			}
 		},
@@ -160,7 +181,7 @@
 
 			return $el.each(function() {
 				var _this = this;
-				stuckStates[ _this.id ] = getStuckState( $(_this) );
+				
 				$( win ).bind( 'scroll.fixedsticky', function(e) {
 					S.update( _this );
 				}).trigger( 'scroll.fixedsticky' );
@@ -174,16 +195,15 @@
 		}
 	};
 
-	function getStuckState($el){
-		var state = 'unstuck';
-		if( $el.hasClass('fixedsticky-on') ){
-			state = 'stuck';
+	function eventName(type,v){
+		if(type === 'stuck'){
+			if(v) return 'stuck';
+			return 'unstuck';
 		}
-		return state;
-	}
-
-	function eventName(v){
-		return v;
+		if(type === 'overlap'){
+			if(v) return 'overlap';
+			return 'overlap-clear';
+		}
 	}
 
 	win.FixedSticky = S;

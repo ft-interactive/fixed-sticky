@@ -142,5 +142,13 @@
             console.log('caught main-nav-block unstuck')
         })
 
+        $( '#main-nav-block').on('overlap', function(){
+            console.log('caught main-nav-block overlap')
+        })
+
+        $( '#main-nav-block').on('overlap-clear', function(){
+            console.log('caught main-nav-block overlap-clear')
+        })
+
         </script>
 </html>
