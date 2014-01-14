@@ -23,13 +23,13 @@
 
 	var S = {
 		classes: {
-			plugin: 'fixedsticky',
-			active: 'fixedsticky-on',
-			inactive: 'fixedsticky-off',
-			clone: 'fixedsticky-dummy',
-			overlap: 'fixedsticky-dummy-over',
-			clear: 'fixedsticky-dummy-clear',
-			withoutFixedFixed: 'fixedsticky-withoutfixedfixed'
+			plugin: 'igsticky',
+			active: 'igsticky-on',
+			inactive: 'igsticky-off',
+			clone: 'igsticky-dummy',
+			overlap: 'igsticky-dummy-over',
+			clear: 'igsticky-dummy-clear',
+			withoutFixedFixed: 'igsticky-withoutfixedfixed'
 		},
 		keys: {
 			offset: 'fixedStickyOffset',
@@ -178,7 +178,6 @@
 			if( S.bypass() ) {
 				return;
 			}
-
 			return $el.each(function() {
 				var _this = this;
 				
