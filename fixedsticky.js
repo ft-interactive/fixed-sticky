@@ -153,7 +153,7 @@
 			} else {
 				if( isAlreadyOn ) {
 					toggleStuck( false );
-					toggleOverlap( false );
+					toggleOverlap( true );
 				}
 			}
 		},
