@@ -18,7 +18,7 @@ In Firefox you you can go to `about:config` and set `layout.css.sticky.enabled` 
 
 The main difference in this fork is that stuck elements trigger events to let the world know about their state. These events are 'stuck' when something gets stuck, 'unstuck' when the opposite happens, 'overlap' or 'overlap-clear' to say when a stuck element is clear of its original position or not.
 
-Thes states all have corresponding CSS classes like this:
+These states all have corresponding CSS classes defined thus:
 ```
 classes: {
 	plugin: 'fixedsticky',
