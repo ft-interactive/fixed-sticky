@@ -1,7 +1,7 @@
 {
-  "name": "filament-sticky-fork",
+  "name": "ig-sticky",
   "version": "0.1.4",
-  "description": "A position: sticky polyfill that works with filamentgroup/fixed-fixed for a safer position:fixed fallback.",
+  "description": "A position: sticky polyfill that works with filamentgroup/fixed-fixed for a safer position:fixed fallback. forked from filament-sticky",
   "main": "fixedsticky.js",
   "scripts": {
     "test": "grunt test"
