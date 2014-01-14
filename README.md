@@ -1,10 +1,9 @@
-# Fixed-sticky: a CSS `position:sticky` polyfill
-
+# Fixed-sticky: a CSS `position:sticky` polyfill (and a bit more)
 
 - (c)2013 @zachleat, Filament Group
 - MIT license
 
-## Explanation
+## The original
 
 CSS position:sticky is really in its infancy in terms of browser support. In stock browsers, it is currently only available in iOS 6.
 
@@ -13,6 +12,10 @@ In Chrome you can enable it by navigating to `chrome://flags` and enabling exper
 In Firefox you you can go to `about:config` and set `layout.css.sticky.enabled` to "true".
 
 ## This fork
+
+- 2014 @tomp, FT Interactive
+- MIT Licence
+
 The main difference in this fork is that stuck elements trigger events to let the world know about their state. These events are 'stuck' when something gets stuck, 'unstuck' when the opposite happens, 'overlap' or 'overlap-clear' to say when a stuck element is clear of its original position or not.
 
 Thes states all have corresponding CSS classes like this:
