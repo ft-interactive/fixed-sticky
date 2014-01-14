@@ -12,6 +12,24 @@ In Chrome you can enable it by navigating to `chrome://flags` and enabling exper
 
 In Firefox you you can go to `about:config` and set `layout.css.sticky.enabled` to "true".
 
+## This fork
+The main difference in this fork is that stuck elements trigger events to let the world know about their state. These events are 'stuck' when something gets stuck, 'unstuck' when the opposite happens, 'overlap' or 'overlap-clear' to say when a stuck element is clear of its original position or not.
+
+Thes states all have corresponding CSS classes like this:
+```
+classes: {
+	plugin: 'fixedsticky',
+	active: 'fixedsticky-on',
+	inactive: 'fixedsticky-off',
+	clone: 'fixedsticky-dummy',
+	overlap: 'fixedsticky-dummy-over',
+	clear: 'fixedsticky-dummy-clear',
+	withoutFixedFixed: 'fixedsticky-withoutfixedfixed'
+},
+
+```
+
+
 ## Usage
 
 Just qualify element you’d like to be `position:sticky` with a `fixedsticky` class.
