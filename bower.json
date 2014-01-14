@@ -1,5 +1,5 @@
 {
-  "name": "filament-sticky-fork",
+  "name": "ig-sticky",
   "version": "0.1.4",
   "main": ["fixedsticky.js", "fixedsticky.css"],
   "ignore": [
