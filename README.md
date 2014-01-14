@@ -1,5 +1,6 @@
 # Fixed-sticky: a CSS `position:sticky` polyfill
 
+
 - (c)2013 @zachleat, Filament Group
 - MIT license
 
