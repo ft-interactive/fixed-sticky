@@ -154,8 +154,9 @@
 				if( isAlreadyOn ) {
 					toggleStuck( false );
 					//if it's outside the extent of the screen don't toggle the overlap
-					//toggleOverlap( false );
-					//toggleOverlap( true );
+					if(scroll <= initialOffset){
+						toggleOverlap( true );	
+					}
 				}
 			}
 		},
