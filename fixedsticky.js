@@ -153,7 +153,9 @@
 			} else {
 				if( isAlreadyOn ) {
 					toggleStuck( false );
-					toggleOverlap( true );
+					//if it's outside the extent of the screen don't toggle the overlap
+					//toggleOverlap( false );
+					//toggleOverlap( true );
 				}
 			}
 		},
