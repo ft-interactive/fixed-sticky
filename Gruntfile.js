@@ -4,7 +4,6 @@ module.exports = function(grunt) {
 
 	// Project configuration.
 	grunt.initConfig({
-
 		// Constants
 		pkg: grunt.file.readJSON('package.json'),
 		banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
