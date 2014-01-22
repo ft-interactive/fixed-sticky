@@ -1,0 +1,22 @@
+.igsticky {
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -ms-sticky;
+	position: -o-sticky;
+	position: sticky;
+}
+/* When position: sticky is supported but native behavior is ignored */
+.igsticky-withoutfixedfixed .igsticky-off,
+.fixed-supported .igsticky-off {
+	position: static;
+}
+.igsticky-withoutfixedfixed .igsticky-on,
+.fixed-supported .igsticky-on {
+	position: fixed;
+}
+.igsticky-dummy {
+	display: none;
+}
+.igsticky-on + .igsticky-dummy {
+	display: block;
+}
