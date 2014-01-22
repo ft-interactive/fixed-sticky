@@ -1,7 +1,7 @@
 {
   "name": "ig-sticky",
   "version": "0.1.5",
-  "main": ["fixedsticky.js", "fixedsticky.css"],
+  "main": ["fixedsticky.js", "fixedsticky.css", "fixedsticky.scss"],
   "ignore": [
     "**/.*"
   ],
