@@ -94,6 +94,7 @@
 			if( !initialOffset ) {
 				initialOffset = $el.offset().top;
 				$el.data( S.keys.offset, initialOffset );
+				$el.find('.'+S.classes.clone).remove(); //check for clones, if they're there, remove them
 				$el.after( $( '<div>' ).addClass( S.classes.clone ).height( height ) );
 			}
 			
