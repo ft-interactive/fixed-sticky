@@ -92,7 +92,8 @@
 
 
 			if( !initialOffset && initialOffset !== 0) {
-				toggleOverlap(true);
+				$el.addClass(S.classes.overlap);
+				height = $el.outerHeight(); //check
 				initialOffset = $el.offset().top;
 				$el.data( S.keys.offset, initialOffset );
 				$el.find('.'+S.classes.clone).remove(); //check for clones, if they're there, remove them
